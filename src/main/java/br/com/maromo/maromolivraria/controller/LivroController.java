@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/livros")
@@ -22,6 +23,12 @@ public class LivroController {
     public List<Livro> listar(){
         return livroRepository.findAll();
     }
+
+    @GetMapping(value = "{id}")
+    public Optional<Livro> listarPorId(@PathVariable Long id){
+        return livroRepository.findById(id);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Livro adicionar(@RequestBody Livro livro){
